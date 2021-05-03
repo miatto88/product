@@ -13,6 +13,19 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     exit();
 }
 
+if(!empty($_POST)) {
+    if ($_POST["item_name"] !== '' && $_POST["storing_count"] !== '' && $_POST["storing_date"] !== '') {
+        $storing = $db->prepare("INSERT INTO storing SET item_code=?, in_count=?, in_date=?");
+        $storing->execute([
+            $_POST["item_name"],
+            $_POST["storing_count"],
+            $_POST["storing_date"]
+        ]);
+
+        header("Location: storing.php");
+    }
+}
+
 $itemData = $db->query(
     'SELECT * FROM storing LEFT JOIN shipping ON storing.item_code=shipping.item_code LEFT JOIN items ON storing.item_code=items.item_code'
 );
@@ -43,16 +56,19 @@ $itemData = $db->query(
     <div class="wrapper">
         <section class="main">
             <div>
-                <form action="">
+                <form action="" method="post">
                     <div>
-                        製品名<input type="text">
-                        数量<input type="text">
-                        
+                        製品名：<select name="item_name">
+                            <option value="YYS-1200W">YYS-1200W</option>
+                            <option value="YYS-2400N">YYS-2400N</option>
+                        </select>
+                        入庫数：<input type="number" name="storing_count">
+                        入庫日：<input type="date" name="storing_date">
+                        <!-- 担当者<input type="text"> -->
                     </div>
+                    <input type="submit" value="送信">
                 </form>
             </div>
-            <p>main</p>
-            <p>main</p>
 
         </section>
         <section class="side">
