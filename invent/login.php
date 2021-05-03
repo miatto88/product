@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('dbconnect.php');
 
 // $test = $db->query('SELECT * FROM items');
@@ -6,15 +7,23 @@ require_once('dbconnect.php');
 //     echo $record['item_code'] . PHP_EOL;
 // }
 
-if ($_POST['member_id'] !== '' && $_POST['password'] !== '') {
-    if (!empty($_POST)) {
+if (!empty($_POST)) {
+    if ($_POST['member_id'] !== '' && $_POST['password'] !== '') {
         $login = $db->prepare('SELECT * FROM members WHERE member_id=? AND password=?');
         $login->execute([$_POST['member_id'], $_POST['password']]);
         $member = $login->fetch();
 
         if ($member) {
-            echo 'ログイン成功';
+            $_SESSION['id'] = $member['id'];
+            $_SESSION['time'] = time();
+
+            header('Location: index.php');
+            exit;
+        } else {
+            $error['login'] = 'failed';
         }
+    } else {
+        $error['login'] = 'blank';
     }
 }
 
@@ -40,10 +49,18 @@ if ($_POST['member_id'] !== '' && $_POST['password'] !== '') {
         <form action="" method="post">
             <div>
                 <label for="login">アカウントID : <input type="text" name="member_id" maxlength="100" value=''></label>
+
                 <label for="login">パスワード : <input type="password" name="password" maxlength="100" value=''></label>
+                
             </div>
             <div>
                 <input type="submit" value="ログイン">
+                <?php if ($error['login'] === 'blank'): ?>
+                    <p class="error">* メールアドレスとパスワードをご記入ください</p>
+                <?php endif; ?>
+                <?php if ($error['login'] === 'failed'): ?>
+                    <p class="error">* ログインに失敗しました。正しくご記入ください</p>
+                <?php endif; ?>
             </div>
         </form>
     </div>

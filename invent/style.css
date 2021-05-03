@@ -1,0 +1,61 @@
+header {
+    margin: 0px 20px 10px 20px;
+    position: fixed;
+}
+
+h1 {
+    display: inline;
+}
+
+.header-info {
+    display: inline;
+    margin-left: 60px;
+    
+}
+
+.wrapper {
+    margin: 0px 20px 0px 20px;
+    width: 80%;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* flex-flow: row-reverse; */
+}
+
+.main, .side {
+    padding: 16px 20px 0px 20px;
+}
+
+.main {
+    position: fixed;
+    top: 60px;
+    left: 228px;
+    width: 70%;
+    height: 90%;
+    background-color: pink;
+    overflow: auto;
+    
+}
+
+.side {
+    position: fixed;
+    top: 60px;
+    width: 160px;
+    height: 90%;
+    background-color: bisque;
+}
+
+.item_name {
+    display: inline-block;
+    width: 150px;
+}
+
+.side_menu {
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 21px;
+}
+
+.button {
+    padding-left: 16px;
+    display: inline-block;
+}
