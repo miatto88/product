@@ -14,11 +14,19 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
 }
 
 $items = $db->query(
-    'SELECT * FROM storing LEFT JOIN shipping ON storing.item_code=shipping.item_code LEFT JOIN items ON storing.item_code=items.item_code'
+    'SELECT * FROM items'
 );
 
 $itemData = $db->query(
     'SELECT * FROM storing LEFT JOIN shipping ON storing.item_code=shipping.item_code LEFT JOIN items ON storing.item_code=items.item_code'
+);
+
+$storings = $db->prepare(
+    'SELECT * FROM storing WHERE item_code=?'
+);
+
+$shippings = $db->prepare(
+    'SELECT * FROM shipping WHERE item_code=?'
 );
 
 ?>
@@ -37,34 +45,56 @@ $itemData = $db->query(
 </head>
 <body>
     <header>
-        <div>
-            <h1>在庫管理システム</h1>
-            <div class="header-info">
-                <?php echo htmlspecialchars($member['name'], ENT_QUOTES); ?>
-            </div>
+        <h1>在庫管理システム</h1>
+        <div class="header-info">
+            <span><?php echo "ログイン名： " . htmlspecialchars($member['name'], ENT_QUOTES); ?></span>
+            <span><a href="logout.php">ログアウト</a></span>
         </div>
     </header>
     <div class="wrapper">
         <section class="main">
-            <?php while ($item = $itemData->fetch()): ?>
+            <?php while ($item = $items->fetch()): ?>
+                <?php 
+                    $storings->execute(array($item["item_code"]));
+                    $count = $storings->fetchall();
+                    
+                    $in_count = 0;
+                    for ($i = 0; $i < count($count); $i++) {
+                        $in_count += intval($count[$i]["in_count"]);
+                    }
+                    
+                    $shippings->execute(array($item["item_code"]));
+                    
+                    $count = $shippings->fetchall();
+                    
+                    $out_count = 0;
+                    for ($i = 0; $i < count($count); $i++) {
+                        $out_count += intval($count[$i]["out_count"]);
+                    }
+
+                    $resultCount = $in_count - $out_count;
+                ?>
                 <div class="item_name">
                     <a href="itemview.php?id=<?php echo $item['id']; ?>"><?php echo $item['item_code'] ?></a>
                 </div>
-                <span class="item_property">在庫：<?php echo $item['in_count'] - $item['out_count'] ?></span>
-                <span class="item_property">リード：<?php echo $item['lead_time'] ?> 日</span>
-                <span class="item_property">ロット：<?php echo $item['lot'] ?> </span>
+                <div class="item_property">
+                    <span>在庫：<?php echo $resultCount; ?></span>
+                    <span>リード：<?php echo $item['lead_time'] ?> 日</span>
+                    <span>ロット：<?php echo $item['lot'] ?> </span>
+                </div>
                 <div class="button">
                     <form method="post">
-                        <input type="hidden" name="item_code" value="<?php echo $item['item_code'] ?>">
+                        <input type="hidden" name="id" value="<?php echo $item['id'] ?>">
+                        <input type="hidden" name="storing_count" value="">
+                        <input type="hidden" name="storing_date" value="">
+                        <input type="hidden" name="shipping_count" value="">
+                        <input type="hidden" name="shipping_date" value="">
                         <button type="submit" formaction="storing.php">入庫</button>
                         <button type="submit" formaction="shipping.php">出庫</button>
                     </form>
                 </div>
                 <hr>
             <?php endwhile; ?>
-            <p>main</p>
-            <p>main</p>
-
         </section>
         <section class="side">
             <span class="side_menu"><a href="index.php">製品一覧</a></span>

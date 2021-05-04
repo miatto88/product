@@ -18,10 +18,8 @@ $itemData = $db->prepare(
     'SELECT * FROM items WHERE items.id=?'
 );
 
-// $items = $db->prepare('SELECT * FROM items WHERE id=?');
 $itemData->execute(array($_REQUEST['id']));
 $item = $itemData->fetch();
-// echo $item["item_code"];
 
 
 $storings = $db->prepare(
@@ -71,11 +69,10 @@ $shippings->execute(array($item["item_code"]));
 </head>
 <body>
     <header>
-        <div>
-            <h1>在庫管理システム</h1>
-            <div class="header-info">
-                <?php echo htmlspecialchars($member['name'], ENT_QUOTES); ?>
-            </div>
+        <h1>在庫管理システム</h1>
+        <div class="header-info">
+            <span><?php echo "ログイン名： " . htmlspecialchars($member['name'], ENT_QUOTES); ?></span>
+            <span><a href="">ログアウト</a></span>
         </div>
     </header>
     <div class="wrapper">
@@ -85,7 +82,7 @@ $shippings->execute(array($item["item_code"]));
                     <?php echo "製品コード　　　：　" . $item["item_code"]; ?>
                 </div>
                 <div>
-                    <?php echo "製品名　　　　　：　" . $item["item_name"]; ?>
+                    <?php echo "製品説明　　　　：　" . $item["item_name"]; ?>
                 </div>
                 <div>
                     <?php echo "設定価格　　　　：　" . $item["price"]; ?>
@@ -107,19 +104,21 @@ $shippings->execute(array($item["item_code"]));
                 </div>
             </div>
             <div class="count_history">
-                <div>入庫履歴
+                <div>
+                    <p>入庫履歴 (日付 / 数量)</p>
                     <?php while ($storing = $storings->fetch()): ?>
                         <div>
+                            <span><?php echo $storing["in_date"] . "　/　"; ?></span>
                             <span><?php echo $storing["in_count"]; ?></span>
-                            <span><?php echo $storing["in_date"]; ?></span>
                         </div>
                     <?php endwhile; ?>
                 </div>
-                <div>出庫履歴
+                <div>
+                    <p>出庫履歴 (日付 / 数量)</p>
                     <?php while ($shipping = $shippings->fetch()): ?>
                         <div>
+                            <span><?php echo $shipping["out_date"] . "　/　"; ?></span>
                             <span><?php echo $shipping["out_count"]; ?></span>
-                            <span><?php echo $shipping["out_date"]; ?></span>
                         </div>
                     <?php endwhile; ?>
                 </div>

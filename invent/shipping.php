@@ -14,16 +14,16 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
 }
 
 if(!empty($_POST)) {
-    if ($_POST["storing_count"] !== '' && $_POST["storing_date"] !== '') {
-        $storing = $db->prepare("INSERT INTO storing SET item_code=?, in_count=?, in_date=?");
-        $storing->execute([
+    if ($_POST["shipping_count"] !== '' && $_POST["shipping_date"] !== '') {
+        $shipping = $db->prepare("INSERT INTO shipping SET item_code=?, out_count=?, out_date=?");
+        $shipping->execute([
             $_POST["item_code"],
-            $_POST["storing_count"],
-            $_POST["storing_date"]
+            $_POST["shipping_count"],
+            $_POST["shipping_date"]
         ]);
         
-        header("Location: storing.php");
-        $storingMessage = $_POST["item_code"] . "を" . $_POST["storing_count"] . "点 入庫しました";
+        header("Location: shipping.php");
+        $shippingMessage = $_POST["item_code"] . "を" . $_POST["shipping_count"] . "点 入庫しました";
     }
 }
 
@@ -67,11 +67,11 @@ $items = $db->query(
                         <?php endwhile; ?>
                     </select>
                 </div>
-                <div>   
-                    入庫数：<input type="number" name="storing_count">
-                </div>
                 <div>
-                    入庫日：<input type="date" name="storing_date">
+                    出庫数：<input type="number" name="shipping_count">
+                </div> 
+                <div>
+                    出庫日：<input type="date" name="shipping_date">
                 </div>
                 <input type="submit" value="送信">
             </form>

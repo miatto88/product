@@ -2,10 +2,9 @@
 session_start();
 require_once('dbconnect.php');
 
-// $test = $db->query('SELECT * FROM items');
-// while ($record = $test->fetch()) {
-//     echo $record['item_code'] . PHP_EOL;
-// }
+if (empty($_POST === 0)) {
+    $error['login'] = "";
+}
 
 if (!empty($_POST)) {
     if ($_POST['member_id'] !== '' && $_POST['password'] !== '') {
@@ -29,7 +28,6 @@ if (!empty($_POST)) {
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -37,7 +35,7 @@ if (!empty($_POST)) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="#">
+    <link rel="stylesheet" href="style.css">
     
     <title>在庫管理システム</title>
 </head>
@@ -46,12 +44,12 @@ if (!empty($_POST)) {
         <h1>在庫管理システム</h1>
     </header>
     <div class="wrapper">
-        <form action="" method="post">
+        <form class="login-form" action="" method="post">
             <div>
-                <label for="login">アカウントID : <input type="text" name="member_id" maxlength="100" value=''></label>
-
-                <label for="login">パスワード : <input type="password" name="password" maxlength="100" value=''></label>
-                
+                <label for="login">アカウント名　:　<input type="text" name="member_id" maxlength="100" value=''></label>
+            </div>
+            <div>
+                <label for="login">パスワード　　:　<input type="password" name="password" maxlength="100" value=''></label>
             </div>
             <div>
                 <input type="submit" value="ログイン">

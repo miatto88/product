@@ -1,24 +1,45 @@
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    height: 95%;
+    width: 95%;
+}
+
+a {
+    color: #024db1;
+}
+
 header {
+    width: 90%;
     margin: 0px 20px 10px 20px;
     position: fixed;
+    display: flex;
+    justify-content: space-between;
 }
 
 h1 {
     display: inline;
+    margin: 0px;
+    width: 360px;
 }
 
 .header-info {
     display: inline;
-    margin-left: 60px;
-    
+    margin: 4px;
+}
+
+.header-info > span {
+    display: inline-block;
+    margin-left: 48px;
 }
 
 .wrapper {
     margin: 0px 20px 0px 20px;
-    width: 80%;
-    /* display: flex; */
-    /* justify-content: center; */
-    /* flex-flow: row-reverse; */
+    height: 90%;
+    width: 90%;
 }
 
 .main, .side {
@@ -28,25 +49,39 @@ h1 {
 .main {
     position: fixed;
     top: 60px;
-    left: 228px;
-    width: 70%;
+    left: 188px;
+    width: calc(80% - 100px);
+    max-width: 960px;
     height: 90%;
     background-color: pink;
     overflow: auto;
-    
+    /* display: none; */
 }
 
 .side {
     position: fixed;
     top: 60px;
-    width: 160px;
+    width: 120px;
     height: 90%;
     background-color: bisque;
 }
 
+.login-form {
+    position: fixed;
+    top: 60px;
+}
+
+.login-form > div{
+    margin-top: 20px;
+}
+
+.login-form label {
+    width: 60px;
+}
+
 .item_name {
     display: inline-block;
-    width: 150px;
+    width: 120px;
 }
 
 .side_menu {
@@ -55,7 +90,35 @@ h1 {
     padding-bottom: 21px;
 }
 
-.button {
-    padding-left: 16px;
+.item_property {
     display: inline-block;
+    margin-right: 12px;
+}
+
+.item_property > span {
+    display: inline-block;
+    width: 100px;
+}
+
+.button {
+    /* padding-left: 16px; */
+    display: inline-block;
+}
+
+.item_profile {
+    margin-bottom: 50px;
+}
+
+.count_history > div {
+    display: inline-block;
+    width: 40%;
+    vertical-align: top;
+}
+
+.count_history p {
+    margin: 8px 0px 8px 0px;
+}
+
+.storage > div {
+    margin-bottom: 12px;
 }
