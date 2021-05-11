@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('dbconnect.php');
+require_once('functions.php');
 
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     $_SESSION['time'] = time();
@@ -49,8 +50,8 @@ $items = $db->query(
     <header>
         <h1>在庫管理システム</h1>
         <div class="header-info">
-            <span><?php echo "ログイン名： " . htmlspecialchars($member['name'], ENT_QUOTES); ?></span>
-            <span><a href="">ログアウト</a></span>
+            <span><?php echo "ログイン名： " . h($member['name']); ?></span>
+            <span><a href="logout.php">ログアウト</a></span>
         </div>
     </header>
     <div class="wrapper">
@@ -60,9 +61,9 @@ $items = $db->query(
                     製品名：<select name="item_code">
                         <?php while ($item = $items->fetch()): ?>
                             <?php if ($_POST["id"] === $item["id"]): ?>
-                                <option value="<?php echo $item["item_code"] ?>" selected><?php echo $item["item_code"] ?></option>
+                                <option value="<?php echo h($item["item_code"]) ?>" selected><?php echo h($item["item_code"]) ?></option>
                             <?php else: ?>
-                                <option value="<?php echo $item["item_code"] ?>"><?php echo $item["item_code"] ?></option>
+                                <option value="<?php echo h($item["item_code"]) ?>"><?php echo h($item["item_code"]) ?></option>
                             <?php endif; ?>
                         <?php endwhile; ?>
                     </select>
@@ -81,6 +82,7 @@ $items = $db->query(
             <span class="side_menu"><a href="storing.php">入庫処理</a></span>
             <span class="side_menu"><a href="shipping.php">出庫処理</a></span>
             <span class="side_menu"><a href="customerlist.php">顧客マスタ</a></span>
+            <span class="side_menu"><a href="join.php">社員登録</a></span>
         </section>
     </div>
 </body>

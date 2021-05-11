@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('dbconnect.php');
+require_once('functions.php');
 
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     $_SESSION['time'] = time();
@@ -72,32 +73,32 @@ $shippings->execute(array($item["item_code"]));
         <h1>在庫管理システム</h1>
         <div class="header-info">
             <span><?php echo "ログイン名： " . htmlspecialchars($member['name'], ENT_QUOTES); ?></span>
-            <span><a href="">ログアウト</a></span>
+            <span><a href="logout.php">ログアウト</a></span>
         </div>
     </header>
     <div class="wrapper">
         <section class="main">
             <div class="item_profile">
                 <div>
-                    <?php echo "製品コード　　　：　" . $item["item_code"]; ?>
+                    <?php echo "製品コード　　　：　" . h($item["item_code"]); ?>
                 </div>
                 <div>
-                    <?php echo "製品説明　　　　：　" . $item["item_name"]; ?>
+                    <?php echo "製品説明　　　　：　" . h($item["item_name"]); ?>
                 </div>
                 <div>
-                    <?php echo "設定価格　　　　：　" . $item["price"]; ?>
+                    <?php echo "設定価格　　　　：　" . h($item["price"]); ?>
                 </div>
                 <div>
-                    <?php echo "製品寸法（横）　：　" . $item["size_w"] . " mm"; ?>
+                    <?php echo "製品寸法（横）　：　" . h($item["size_w"]) . " mm"; ?>
                 </div>
                 <div>
-                    <?php echo "製品寸法（縦）　：　" . $item["size_h"] . " mm"; ?>
+                    <?php echo "製品寸法（縦）　：　" . h($item["size_h"]) . " mm"; ?>
                 </div>
                 <div>
-                    <?php echo "ロット数　　　　：　" . $item["lot"]; ?>
+                    <?php echo "ロット数　　　　：　" . h($item["lot"]); ?>
                 </div>
                 <div>
-                    <?php echo "リードタイム　　：　" . $item["lead_time"] . " 日"; ?>
+                    <?php echo "リードタイム　　：　" . h($item["lead_time"]) . " 日"; ?>
                 </div>
                 <div>
                     <?php echo "在庫　　　　　　：　" . $in_count - $out_count; ?>
@@ -108,8 +109,8 @@ $shippings->execute(array($item["item_code"]));
                     <p>入庫履歴 (日付 / 数量)</p>
                     <?php while ($storing = $storings->fetch()): ?>
                         <div>
-                            <span><?php echo $storing["in_date"] . "　/　"; ?></span>
-                            <span><?php echo $storing["in_count"]; ?></span>
+                            <span><?php echo h($storing["in_date"]) . "　/　"; ?></span>
+                            <span><?php echo h($storing["in_count"]); ?></span>
                         </div>
                     <?php endwhile; ?>
                 </div>
@@ -117,8 +118,8 @@ $shippings->execute(array($item["item_code"]));
                     <p>出庫履歴 (日付 / 数量)</p>
                     <?php while ($shipping = $shippings->fetch()): ?>
                         <div>
-                            <span><?php echo $shipping["out_date"] . "　/　"; ?></span>
-                            <span><?php echo $shipping["out_count"]; ?></span>
+                            <span><?php echo h($shipping["out_date"]) . "　/　"; ?></span>
+                            <span><?php echo h($shipping["out_count"]); ?></span>
                         </div>
                     <?php endwhile; ?>
                 </div>
@@ -129,6 +130,7 @@ $shippings->execute(array($item["item_code"]));
             <span class="side_menu"><a href="storing.php">入庫処理</a></span>
             <span class="side_menu"><a href="shipping.php">出庫処理</a></span>
             <span class="side_menu"><a href="customerlist.php">顧客マスタ</a></span>
+            <span class="side_menu"><a href="join.php">社員登録</a></span>
         </section>
     </div>
 </body>

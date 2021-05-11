@@ -14,25 +14,34 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     exit();
 }
 
+
+if (empty($_GET)) {
+    $_GET['error'] = "";
+}
+
 if(!empty($_POST)) {
-    if ($_POST["shipping_count"] !== '' && $_POST["shipping_date"] !== '') {
-        $shipping = $db->prepare("INSERT INTO shipping SET item_code=?, out_count=?, out_date=?");
-        $shipping->execute([
-            $_POST["item_code"],
-            $_POST["shipping_count"],
-            $_POST["shipping_date"]
+    $members_id = $db->prepare('SELECT * FROM members WHERE member_id=?');
+    $members_id->execute(array($_POST["member_id"]));
+    $member_id = $members_id->fetch();
+
+    if ($member_id > 0) {
+        header("Location: join.php?error=1");
+        exit();
+    } elseif ($_POST["member_id"] !== '' && $_POST["member_pass"] !== '') {
+        $join_member = $db->prepare("INSERT INTO members SET member_id=?, password=?, name=?");
+        $join_member->execute([
+            $_POST["member_id"],
+            sha1($_POST["member_pass"]),
+            $_POST["member_name1"] . " " . $_POST["member_name2"]
         ]);
         
-        header("Location: shipping.php");
+        header("Location: index.php");
+        exit();
+        $join_Message = $_POST["member_name1"] . $_POST["member_name2"] . "さんを登録しました";
     }
 }
 
-$items = $db->query(
-    "SELECT * FROM items"
-);
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -55,26 +64,24 @@ $items = $db->query(
     </header>
     <div class="wrapper">
         <section class="main">
-            <form class="storage" action="" method="post">
+            <form class="join-form" action="" method="post">
                 <div>
-                    製品名：<select name="item_code">
-                        <?php while ($item = $items->fetch()): ?>
-                            <?php if ($_POST["id"] === $item["id"]): ?>
-                                <option value="<?php echo h($item["item_code"]) ?>" selected><?php echo h($item["item_code"]) ?></option>
-                            <?php else: ?>
-                                <option value="<?php echo h($item["item_code"]) ?>"><?php echo h($item["item_code"]) ?></option>
-                            <?php endif; ?>
-                        <?php endwhile; ?>
-                    </select>
+                    社員番号　　　<input type="number" name="member_id">
+                </div>
+                <div>   
+                    パスワード　　<input type="text" name="member_pass">
+                </div>
+                <div>   
+                    氏名（姓）　　<input type="text" name="member_name1">
                 </div>
                 <div>
-                    出庫数：<input type="number" name="shipping_count">
-                </div> 
-                <div>
-                    出庫日：<input type="date" name="shipping_date">
+                    氏名（名）　　<input type="text" name="member_name2">
                 </div>
-                <input type="submit" value="送信">
+                <input type="submit" value="登録">
             </form>
+            <?php if ($_GET['error'] === "1"): ?>
+                <p class="error">* 指定の社員番号は既に登録されています</p>
+            <?php endif; ?>
         </section>
         <section class="side">
             <span class="side_menu"><a href="index.php">製品一覧</a></span>

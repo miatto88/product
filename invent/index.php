@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('dbconnect.php');
+require_once('functions.php');
 
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
     $_SESSION['time'] = time();
@@ -47,7 +48,7 @@ $shippings = $db->prepare(
     <header>
         <h1>在庫管理システム</h1>
         <div class="header-info">
-            <span><?php echo "ログイン名： " . htmlspecialchars($member['name'], ENT_QUOTES); ?></span>
+            <span><?php echo "ログイン名： " . h($member['name']); ?></span>
             <span><a href="logout.php">ログアウト</a></span>
         </div>
     </header>
@@ -64,7 +65,6 @@ $shippings = $db->prepare(
                     }
                     
                     $shippings->execute(array($item["item_code"]));
-                    
                     $count = $shippings->fetchall();
                     
                     $out_count = 0;
@@ -75,16 +75,16 @@ $shippings = $db->prepare(
                     $resultCount = $in_count - $out_count;
                 ?>
                 <div class="item_name">
-                    <a href="itemview.php?id=<?php echo $item['id']; ?>"><?php echo $item['item_code'] ?></a>
+                    <a href="itemview.php?id=<?php echo h($item['id']); ?>"><?php echo h($item['item_code']) ?></a>
                 </div>
                 <div class="item_property">
                     <span>在庫：<?php echo $resultCount; ?></span>
-                    <span>リード：<?php echo $item['lead_time'] ?> 日</span>
-                    <span>ロット：<?php echo $item['lot'] ?> </span>
+                    <span>リード：<?php echo h($item['lead_time']) ?> 日</span>
+                    <span>ロット：<?php echo h($item['lot']) ?> </span>
                 </div>
                 <div class="button">
                     <form method="post">
-                        <input type="hidden" name="id" value="<?php echo $item['id'] ?>">
+                        <input type="hidden" name="id" value="<?php echo h($item['id']) ?>">
                         <input type="hidden" name="storing_count" value="">
                         <input type="hidden" name="storing_date" value="">
                         <input type="hidden" name="shipping_count" value="">
@@ -101,6 +101,7 @@ $shippings = $db->prepare(
             <span class="side_menu"><a href="storing.php">入庫処理</a></span>
             <span class="side_menu"><a href="shipping.php">出庫処理</a></span>
             <span class="side_menu"><a href="customerlist.php">顧客マスタ</a></span>
+            <span class="side_menu"><a href="join.php">社員登録</a></span>
         </section>
     </div>
 </body>
