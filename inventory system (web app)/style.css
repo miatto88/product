@@ -1,0 +1,162 @@
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    height: 95%;
+    width: 95%;
+}
+
+header {
+    margin: 0px 20px 10px 20px;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 1080px;
+}
+
+h1 {
+    display: inline;
+    margin: 0px;
+    width: 360px;
+}
+
+h1.login-title {
+    font-size: 36px;
+    display: block;
+    text-align: center;
+    margin: 40px auto 32px;
+    width: 480px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    margin: auto;
+    padding: 20px 0px;
+    width: 400px;
+    border: 2px solid rgba(82, 143, 255, 0.603);
+    border-radius: 40px;
+}
+
+.login-form > div{
+    margin-top: 16px;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+p.error {
+    margin-top: 16px;
+    color: red;
+}
+
+.header-info {
+    display: inline;
+    margin: 4px;
+}
+
+.header-info > span {
+    display: inline-block;
+    margin-left: 48px;
+}
+
+.wrapper {
+    margin: 0px 20px 0px 20px;
+    height: 90%;
+    width: 90%;
+}
+
+.main, .side {
+    padding: 16px 20px 0px 20px;
+}
+
+.main {
+    position: fixed;
+    top: 60px;
+    left: 188px;
+    width: calc(80% - 100px);
+    max-width: 960px;
+    height: 90%;
+    border: 2px solid black;
+    /* background-color: pink; */
+    overflow: auto;
+    /* display: none; */
+}
+
+.main a {
+    color: rgb(5, 29, 238);
+    text-decoration: none;
+}
+
+.side {
+    position: fixed;
+    top: 60px;
+    width: 110px;
+    height: calc(90% + 4px);
+    background-color: rgba(0, 0, 0, 0.856);
+}
+
+.side a {
+    color: rgba(255, 255, 255, 0.822);
+}
+
+.side_menu {
+    display: inline-block;
+    width: 80%;
+    margin-bottom: 18px;
+    padding: 4px;
+}
+
+.active {
+    color: black;
+    background-color: rgb(241, 241, 241);
+}
+
+.active a {
+    color: black;
+}
+
+.item_name {
+    display: inline-block;
+    width: 120px;
+}
+
+.item_property {
+    display: inline-block;
+    margin-right: 12px;
+}
+
+.item_property > span {
+    display: inline-block;
+    width: 100px;
+}
+
+.button {
+    /* padding-left: 16px; */
+    display: inline-block;
+}
+
+.item_profile {
+    margin-bottom: 50px;
+}
+
+.count_history > div {
+    display: inline-block;
+    width: 40%;
+    vertical-align: top;
+}
+
+.count_history p {
+    margin: 8px 0px 8px 0px;
+}
+
+.storage > div {
+    margin-bottom: 12px;
+}
+
+.join-form > div {
+    margin-bottom: 12px;
+}
