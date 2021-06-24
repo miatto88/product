@@ -101,7 +101,7 @@ $shippings->execute(array($item["item_code"]));
                     <?php echo "リードタイム　　：　" . h($item["lead_time"]) . " 日"; ?>
                 </div>
                 <div>
-                    <?php echo "在庫　　　　　　：　" . $in_count - $out_count; ?>
+                    <?php echo "在庫　　　　　　：　" . intval($in_count - $out_count); ?>
                 </div>
             </div>
             <div class="count_history">
