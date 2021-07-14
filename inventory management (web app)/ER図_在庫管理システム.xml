@@ -38,148 +38,135 @@
 		<type label="Bit" length="0" sql="bit" quote=""/>
 	</group>
 </datatypes><table x="401" y="351" name="出庫テーブル">
-<row name="出庫id" null="1" autoincrement="1">
+<row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="製品id_製品マスタ" null="1" autoincrement="0">
+<row name="item_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="製品マスタ" row="製品id" />
+<default>NULL</default><relation table="製品マスタ" row="id" />
 </row>
-<row name="出庫数量" null="1" autoincrement="0">
+<row name="out_quantity" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="出庫登録日" null="1" autoincrement="0">
-<datatype>DATE</datatype>
-<default>NULL</default></row>
-<row name="社員id_社員マスタ" null="1" autoincrement="0">
+<row name="member_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="社員マスタ" row="社員id" />
+<default>NULL</default><relation table="社員マスタ" row="id" />
 <comment>入力した社員は誰か</comment>
 </row>
-<row name="顧客id_顧客マスタ" null="1" autoincrement="0">
+<row name="customer_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="顧客マスタ" row="顧客id" />
+<default>NULL</default><relation table="顧客マスタ" row="id" />
 <comment>発送先、あるいは注文先の顧客id</comment>
 </row>
+<row name="created_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default></row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
-<part>出庫id</part>
+<part>id</part>
 </key>
 </table>
-<table x="702" y="202" name="社員マスタ">
-<row name="社員id" null="1" autoincrement="1">
+<table x="702" y="201" name="社員マスタ">
+<row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="社員名" null="1" autoincrement="0">
+<row name="member_name" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
-<row name="パスワード" null="1" autoincrement="0">
+<row name="password" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
-<row name="社員登録日" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
+<row name="admin" null="1" autoincrement="0">
+<datatype>bit</datatype>
+<default>NULL</default></row>
+<row name="created_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default></row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
-<part>社員id</part>
+<part>id</part>
 </key>
-</table>
-<table x="1001" y="301" name="拠点マスタ (仮)">
-<row name="拠点id" null="1" autoincrement="1">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="拠点属性" null="1" autoincrement="0">
-<datatype>MEDIUMTEXT</datatype>
-<default>NULL</default><comment>工場 や 営業所 という分類</comment>
-</row>
-<row name="拠点名" null="1" autoincrement="0">
-<datatype>MEDIUMTEXT</datatype>
-<default>NULL</default></row>
-<row name="住所" null="1" autoincrement="0">
-<datatype>MEDIUMTEXT</datatype>
-<default>NULL</default></row>
-<row name="連絡先" null="1" autoincrement="0">
-<datatype>MEDIUMTEXT</datatype>
-<default>NULL</default></row>
-<row name="責任者" null="1" autoincrement="0">
-<datatype>MEDIUMTEXT</datatype>
-<default>NULL</default></row>
-<key type="PRIMARY" name="">
-<part>拠点id</part>
-</key>
-<comment>拠点 = 製品を製造する工場のイメージ</comment>
 </table>
 <table x="401" y="100" name="入庫テーブル">
-<row name="入庫id" null="1" autoincrement="1">
+<row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="製品id_製品マスタ" null="1" autoincrement="0">
+<row name="item_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="製品マスタ" row="製品id" />
+<default>NULL</default><relation table="製品マスタ" row="id" />
 </row>
-<row name="出庫数量" null="1" autoincrement="0">
+<row name="in_quantity" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="入庫登録日" null="1" autoincrement="0">
-<datatype>DATE</datatype>
-<default>NULL</default></row>
-<row name="社員id_社員マスタ" null="1" autoincrement="0">
+<row name="member_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="社員マスタ" row="社員id" />
+<default>NULL</default><relation table="社員マスタ" row="id" />
 <comment>入力した社員は誰か</comment>
 </row>
+<row name="created_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default></row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
-<part>入庫id</part>
+<part>id</part>
 </key>
 </table>
 <table x="101" y="151" name="製品マスタ">
-<row name="製品id" null="1" autoincrement="1">
+<row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="製品分類" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="製品名" null="1" autoincrement="0">
+<row name="item_category" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
-<row name="製品登録日" null="1" autoincrement="0">
-<datatype>DATE</datatype>
+<row name="item_name" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
-<row name="価格" null="1" autoincrement="0">
+<row name="price" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="発注点(仮)" null="1" autoincrement="0">
+<row name="item_count" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><comment>在庫が発注点を下回った場合、工場に製造の指示を出す</comment>
-</row>
-<row name="リードタイム(仮)" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><comment>製造指示を受けてから入庫までにかかる時間</comment>
-</row>
-<row name="その他情報" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><comment>製品の寸法、重量などの情報</comment>
-</row>
+<default>NULL</default></row>
+<row name="created_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default></row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
-<part>製品id</part>
+<part>id</part>
 </key>
 </table>
 <table x="701" y="502" name="顧客マスタ">
-<row name="顧客id" null="1" autoincrement="1">
+<row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="住所" null="1" autoincrement="0">
+<row name="customer_address" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
-<row name="電話番号" null="1" autoincrement="0">
+<row name="customer_phone" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
-<row name="FAX" null="1" autoincrement="0">
+<row name="customer_fax" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
-<row name="先方担当者氏名" null="1" autoincrement="0">
+<row name="customer_person" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<row name="creadted_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default></row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
-<part>顧客id</part>
+<part>id</part>
 </key>
 </table>
 </sql>
