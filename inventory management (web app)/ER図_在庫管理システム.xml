@@ -37,25 +37,25 @@
 		<type label="SET" length="1" sql="SET" quote=""/>
 		<type label="Bit" length="0" sql="bit" quote=""/>
 	</group>
-</datatypes><table x="401" y="351" name="出庫テーブル">
+</datatypes><table x="402" y="351" name="stock_out">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="item_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="製品マスタ" row="id" />
+<default>NULL</default><relation table="items" row="id" />
 </row>
-<row name="out_quantity" null="1" autoincrement="0">
+<row name="quantity" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="member_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="社員マスタ" row="id" />
+<default>NULL</default><relation table="members" row="id" />
 <comment>入力した社員は誰か</comment>
 </row>
 <row name="customer_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="顧客マスタ" row="id" />
+<default>NULL</default><relation table="customers" row="id" />
 <comment>発送先、あるいは注文先の顧客id</comment>
 </row>
 <row name="created_at" null="1" autoincrement="0">
@@ -68,18 +68,18 @@
 <part>id</part>
 </key>
 </table>
-<table x="702" y="201" name="社員マスタ">
+<table x="701" y="100" name="members">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="member_name" null="1" autoincrement="0">
+<row name="name" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
 <row name="password" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
-<row name="admin" null="1" autoincrement="0">
-<datatype>bit</datatype>
+<row name="role" null="1" autoincrement="0">
+<datatype>TINYINT</datatype>
 <default>NULL</default></row>
 <row name="created_at" null="1" autoincrement="0">
 <datatype>DATETIME</datatype>
@@ -87,24 +87,27 @@
 <row name="updated_at" null="1" autoincrement="0">
 <datatype>DATETIME</datatype>
 <default>NULL</default></row>
+<row name="deleted_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="401" y="100" name="入庫テーブル">
+<table x="401" y="100" name="stock_in">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="item_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="製品マスタ" row="id" />
+<default>NULL</default><relation table="items" row="id" />
 </row>
-<row name="in_quantity" null="1" autoincrement="0">
+<row name="quantity" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="member_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="社員マスタ" row="id" />
+<default>NULL</default><relation table="members" row="id" />
 <comment>入力した社員は誰か</comment>
 </row>
 <row name="created_at" null="1" autoincrement="0">
@@ -117,20 +120,17 @@
 <part>id</part>
 </key>
 </table>
-<table x="101" y="151" name="製品マスタ">
+<table x="101" y="151" name="items">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="item_category" null="1" autoincrement="0">
-<datatype>MEDIUMTEXT</datatype>
-<default>NULL</default></row>
-<row name="item_name" null="1" autoincrement="0">
+<row name="name" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
 <row name="price" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="item_count" null="1" autoincrement="0">
+<row name="stock" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="created_at" null="1" autoincrement="0">
@@ -139,30 +139,36 @@
 <row name="updated_at" null="1" autoincrement="0">
 <datatype>DATETIME</datatype>
 <default>NULL</default></row>
+<row name="deleted_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="701" y="502" name="顧客マスタ">
+<table x="702" y="351" name="customers">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="customer_address" null="1" autoincrement="0">
+<row name="address" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
-<row name="customer_phone" null="1" autoincrement="0">
+<row name="phone" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
-<row name="customer_fax" null="1" autoincrement="0">
+<row name="fax" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
-<row name="customer_person" null="1" autoincrement="0">
+<row name="person" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
 <row name="creadted_at" null="1" autoincrement="0">
 <datatype>DATETIME</datatype>
 <default>NULL</default></row>
 <row name="updated_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default></row>
+<row name="deleted_at" null="1" autoincrement="0">
 <datatype>DATETIME</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
