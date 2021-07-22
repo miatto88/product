@@ -94,7 +94,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="401" y="100" name="stock_in">
+<table x="401" y="100" name="stock_in_histories">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
