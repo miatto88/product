@@ -37,7 +37,7 @@
 		<type label="SET" length="1" sql="SET" quote=""/>
 		<type label="Bit" length="0" sql="bit" quote=""/>
 	</group>
-</datatypes><table x="402" y="351" name="stock_out">
+</datatypes><table x="402" y="351" name="stock_out_histories">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -73,10 +73,10 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="name" null="1" autoincrement="0">
-<datatype>MEDIUMTEXT</datatype>
+<datatype>VARCHAR</datatype>
 <default>NULL</default></row>
 <row name="password" null="1" autoincrement="0">
-<datatype>MEDIUMTEXT</datatype>
+<datatype>VARCHAR</datatype>
 <default>NULL</default></row>
 <row name="role" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
@@ -125,7 +125,7 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="name" null="1" autoincrement="0">
-<datatype>MEDIUMTEXT</datatype>
+<datatype>VARCHAR</datatype>
 <default>NULL</default></row>
 <row name="price" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
@@ -150,17 +150,33 @@
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="address" null="1" autoincrement="0">
-<datatype>MEDIUMTEXT</datatype>
-<default>NULL</default></row>
 <row name="phone" null="1" autoincrement="0">
-<datatype>MEDIUMTEXT</datatype>
+<datatype>VARCHAR</datatype>
 <default>NULL</default></row>
 <row name="fax" null="1" autoincrement="0">
-<datatype>MEDIUMTEXT</datatype>
+<datatype>VARCHAR</datatype>
 <default>NULL</default></row>
-<row name="person" null="1" autoincrement="0">
-<datatype>MEDIUMTEXT</datatype>
+<row name="address_1" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="address_2" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>マンション、建物名</comment>
+</row>
+<row name="city" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="state/province" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="zip_code" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="first_name" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="last_name" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
 <default>NULL</default></row>
 <row name="creadted_at" null="1" autoincrement="0">
 <datatype>DATETIME</datatype>
